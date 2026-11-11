@@ -1,7 +1,7 @@
 # Divergence measures between persistence diagrams
 Python implementation of Wasserstein and bottleneck divergences for persistence diagrams used in the paper New divergence measures between persistence diagrams and stability of vectorizations. Configurable penalties for unmatched target points are provided.
 
-The order of the diagrams matters: the divergence from A to B can differ from the divergence from B to A.
+The order of the diagrams matters: the divergence from `A` to `B` can differ from the divergence from B to A.
 
 ## Requirements and installation
 
@@ -45,6 +45,7 @@ Births must be finite, deaths may be finite or positive infinity, and every birt
 ## Public functions
 
 | Function | Usage |
+| --- | --- |
 | `bottleneck_divergence(dgm1, dgm2, func=arctan_penalty)` | Compute the directed bottleneck divergence. |
 | `wasserstein_divergence(dgm1, dgm2, func, p=1)` | Compute the directed Wasserstein divergence for finite `p >= 1`. Use `p=np.inf` to call the bottleneck routine. |
 
@@ -117,11 +118,11 @@ print(f"W2(B || A): {reverse}")
 
 Expected output:
 
-'''text
+```text
 W2(A || B): 2.356194
 Bottleneck(A || B): 2.356194
 W2(B || A): inf
-'''
+```
 
 The extra essential target point receives a finite penalty in the forward direction. In the reverse direction, an essential source point cannot be matched at finite cost, so the result is np.inf.
 
