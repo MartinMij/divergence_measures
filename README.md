@@ -1,7 +1,7 @@
 # Divergence measures between persistence diagrams
 Python implementation of Wasserstein and bottleneck divergences for persistence diagrams used in the paper New divergence measures between persistence diagrams and stability of vectorizations. Configurable penalties for unmatched target points are provided.
 
-The order of the diagrams matters: the divergence from `A` to `B` can differ from the divergence from B to A.
+The order of the diagrams matters: the divergence from `A` to `B` can differ from the divergence from `B` to `A`.
 
 ## Requirements and installation
 
@@ -19,13 +19,13 @@ python -m pip install numpy scipy
 
 The examples below were checked with Python 3.12.14, NumPy 2.3.5, and SciPy 1.17.0. These are tested versions, not minimum-version requirements.
 
-Download divergence_measures.py and place it in the same directory as your Python script, or in the working directory of your notebook. Import the functions as shown below.
+Download `divergence_measures.py` and place it in the same directory as your Python script, or in the working directory of your notebook. Import the functions as shown below.
 
 Running the module by itself does not print results; it provides functions to import.
 
 ## Input format
 
-Each diagram must be a NumPy array of shape (n, 2). Each row contains a birth and a death:
+Each diagram must be a NumPy array of shape `(n, 2)`. Each row contains a birth and a death:
 
 ```python
 import numpy as np
@@ -49,18 +49,19 @@ Births must be finite, deaths may be finite or positive infinity, and every birt
 | `bottleneck_divergence(dgm1, dgm2, func=arctan_penalty)` | Compute the directed bottleneck divergence. |
 | `wasserstein_divergence(dgm1, dgm2, func, p=1)` | Compute the directed Wasserstein divergence for finite `p >= 1`. Use `p=np.inf` to call the bottleneck routine. |
 
-Both functions return a float, which may be np.inf. The 'func' argument is required for wasserstein_divergence; the bottleneck function defaults to 'arctan_penalty'.
+Both functions return a float, which may be np.inf. The `func` argument is required for `wasserstein_divergence`; the bottleneck function defaults to `arctan_penalty`.
 
 Functions whose names begin with an underscore are internal helpers.
 
 ## Penalty functions
 
 | Function | Default parameters | Admissible parameters |
+| --- | --- | --- |
 | `arctan_penalty(x, a=1.0, b=1.0)` | `a=1.0, b=1.0` | Finite `a, b >= 0` and `a*b <= 1`. |
 | `tanh_penalty(x, a=1.0, b=1.0)` | `a=1.0, b=1.0` | Finite `a, b >= 0` and `a*b <= 2`. |
 | `linear_penalty(x, slope=0.5)` | `slope=0.5` | Finite `0 <= slope <= 1`. |
 
-Use 'functools.partial' to configure a penalty's parameters, as in the second example.
+Use `functools.partial` to configure a penalty's parameters, as in the second example.
 
 Custom penalties must accept a NumPy array and return an array of the same shape or a broadcastable scalar. For the intended divergences, they must be nonnegative, subadditive, and no greater than identity function. These mathematical properties are the caller's responsibility. Penalties must also evaluate correctly at np.inf when the target contains essential points.
 
