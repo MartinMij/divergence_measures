@@ -76,7 +76,7 @@ from persistence_divergences import (
 )
 
 A = np.array([[0.0, 2.0]])
-B = np.array([[0.0, 2.0], [4.0, 6.0]], dtype=float)
+B = np.array([[0.0, 2.0], [4.0, 6.0]])
 
 forward = wasserstein_divergence(A, B, func=arctan_penalty, p=2)
 reverse = wasserstein_divergence(B, A, func=arctan_penalty, p=2)
@@ -102,8 +102,8 @@ from functools import partial
 import numpy as np
 from persistence_divergences import arctan_penalty, wasserstein_divergence
 
-A = np.array([[0.0, np.inf]], dtype=float)
-B = np.array([[0.0, np.inf], [4.0, np.inf]], dtype=float)
+A = np.array([[0.0, np.inf]])
+B = np.array([[0.0, np.inf], [4.0, np.inf]])
 
 # Admissible parameters: a*b = 0.75 <= 1.
 penalty = partial(arctan_penalty, a=0.5, b=1.5)
